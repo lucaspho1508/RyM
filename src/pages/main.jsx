@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 
 import {
   fetchCharacters,
@@ -11,19 +10,19 @@ import {
   selectCharactersError,
 } from "../redux/rickAndMorty/charactersSlice";
 
-import Button from "../components/ui/button";
-import CharacterCard from "../components/ui/character-card";
-import PageLayout from "../components/ui/page-layout";
+import Button from "../components/button";
+import CharacterCard from "../components/character-card";
+import PageLayout from "../components/page-layout";
 import usePagination from "../hooks/usePagination";
 
-const Home = () => {
+
+const Main = () => {
   const dispatch = useDispatch();
   const characters = useSelector(selectCharacters);
   const error = useSelector(selectCharactersError);
   const pending = useSelector(selectCharactersPending);
   const pagination = useSelector(selectCharactersPagination);
 
-  const { t } = useTranslation();
 
   const { page, goToNextPage, goToPrevPage, hasNextPage, hasPreviousPage } =
     usePagination({
@@ -44,26 +43,26 @@ const Home = () => {
       </div>
 
       {pending && (
-        <p className="text-xl font-bold text-center">{t("Loading...")}</p>
+        <p className="text-xl font-bold text-center">Loading...</p>
       )}
       {error && <p className="text-xl font-bold text-center">{error}</p>}
       {!pending && !error && !characters?.length && (
         <p className="text-xl font-bold text-center">
-          {t("No characters found")}
+          Something happened...
         </p>
       )}
 
       <div className="flex flex-col items-center justify-between px-20 mt-10 mb-20 gap-y-2 sm:items-center sm:flex-row">
         <Button onClick={goToPrevPage} disabled={!hasPreviousPage}>
-          {"<"} {t("Previous Page")}
+          Back
         </Button>
 
         <Button onClick={goToNextPage} disabled={!hasNextPage}>
-          {t("Next Page")} {">"}
+          Next
         </Button>
       </div>
     </PageLayout>
   );
 };
 
-export default Home;
+export default Main;

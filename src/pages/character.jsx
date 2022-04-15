@@ -9,21 +9,20 @@ import {
   selectCurrentCharacter,
 } from "../redux/rickAndMorty/charactersSlice";
 
-import PageLayout from "../components/ui/page-layout";
-import Button from "../components/ui/button";
-import { useTranslation } from "react-i18next";
+import PageLayout from "../components/page-layout";
+import Button from "../components/button";
 
 const Character = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+
 
   const character = useSelector(selectCurrentCharacter);
   const error = useSelector(selectCharactersError);
   const pending = useSelector(selectCharactersPending);
 
-  const { name, image, gender, species, status, type, location, episode } =
+  const { name, image, gender, species, status, type, location } =
     character || {};
 
   useEffect(() => {
@@ -36,17 +35,15 @@ const Character = () => {
 
   return (
     <PageLayout>
-      <Button small onClick={goBack}>
-        {"<"} {t("Back")}
-      </Button>
+
       <div className="flex flex-col items-center mt-5">
         {pending && (
-          <p className="text-xl font-bold text-center">{t("Loading...")}</p>
+          <p className="text-xl font-bold text-center">Loading...</p>
         )}
         {error && <p className="text-xl font-bold text-center">{error}</p>}
         {!pending && !error && !character && (
           <p className="text-xl font-bold text-center">
-            {t("Character not found")}
+            Something happened...
           </p>
         )}
 
@@ -62,30 +59,22 @@ const Character = () => {
               <p className="my-5 text-2xl font-bold text-center uppercase">
                 {name}
               </p>
-              <CharProp label={t("Gender")} value={gender} />
-              <CharProp label={t("Status")} value={status} />
-              <CharProp label={t("Species")} value={species} />
-              {type && <CharProp label={t("Type")} value={type} />}
-              <CharProp label={t("Location")} value={location?.name} />
-              <CharProp
-                label={t("Episodes appearance")}
-                value={episode?.length}
-              />
+              <p>Gender: {gender} </p>
+              <p>Status: {status} </p>
+              <p>Species: {species} </p>
+              {type && <p>Type: {type} </p>}
+              <p>Location: {location?.name} </p>
             </div>
           </div>
         )}
       </div>
+      <Button small onClick={goBack}>
+        {"<"} Back
+      </Button>
     </PageLayout>
   );
 };
 
-const CharProp = ({ label, value }) => {
-  return (
-    <div className="flex flex-row mt-2">
-      <p className="mr-2 font-bold">{label}</p>
-      <p>{value}</p>
-    </div>
-  );
-};
+
 
 export default Character;
