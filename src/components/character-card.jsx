@@ -1,13 +1,18 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
 
-const CharacterCard = ({ name, image, onClick = () => {} }) => {
+const CharacterCard = ({ name, image }) => {
   return (
-    <div
-      onClick={onClick}
-      className="flex flex-col items-center justify-center p-5 transition-all ease-in-out bg-white shadow-sm rounded-xl hover:shadow-lg hover:cursor-pointer hover:scale-105 max-w-max justify-items-center"
-    >
-      <img alt={name} src={image} className="flex object-cover rounded-lg" />
-      <p className="mt-5 text-2xl font-bold text-center uppercase">{name}</p>
+    <div className="text-center" key={name}>
+      <Card
+        className=" mx-auto mb-5 p-3 "
+        style={{ width: "23rem" }}
+      >
+        <Card.Img variant="top" src={image} />
+        <Card.Body>
+          <Card.Title className="mt-3">{name}</Card.Title>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
