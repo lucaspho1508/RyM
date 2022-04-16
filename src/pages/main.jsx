@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CharacterCard from "../components/character-card";
 import Pagination from "../components/pagination";
 import Header from "../components/header";
-// import usePagination from "../hooks/usePagination";
+
 
 import {
   fetchCharacters,
@@ -23,11 +23,16 @@ const Main = () => {
 
   const [pageNumber, setPageNumber] = useState(1);
 
-  // const { page, goToNextPage, goToPrevPage, hasNextPage, hasPreviousPage } =
-  //   usePagination({
-  //     totalPages: pagination?.pages,
-  //     scrollToTop: true,
-  //   });
+  const prev = () => {
+    setPageNumber(pageNumber => pageNumber - 1)
+    window.scrollTo({ top: 0})
+  }   
+ 
+  const next = () => {
+      setPageNumber(pageNumber => pageNumber + 1)
+      window.scrollTo({ top: 0})
+}   
+
 
   useEffect(
     () => dispatch(fetchCharacters(pageNumber)),
@@ -36,7 +41,7 @@ const Main = () => {
 
   return (
     <>
-      <Header />
+      <Header pageNumber={pageNumber} setPageNumber={setPageNumber} lastPage={pagination?.pages} prev={prev} next={next}/>
       <div className="row">
         {characters?.map(({ id, name, image }) => (
           <div className="col-lg-4 col-md-4 col-sm-6 ml-5">
@@ -65,7 +70,8 @@ const Main = () => {
       <Pagination
         pageNumber={pageNumber}
         lastPage={pagination?.pages}
-        setPageNumber={setPageNumber}
+        prev={prev}
+        next={next}
       />
     </>
   );
