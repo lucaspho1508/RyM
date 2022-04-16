@@ -32,15 +32,21 @@ const Character = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center mt-5">
-        {pending && <p className="text-xl font-bold text-center">Loading...</p>}
-        {error && <p className="text-xl font-bold text-center">{error}</p>}
-        {!pending && !error && !character && (
-          <p className="text-xl font-bold text-center">Something happened...</p>
-        )}
+      <div>
+        {pending && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+        {!pending && !error && !character && <p>Something happened...</p>}
 
         {!pending && character?.id && (
-          <Detail image={image} name={name} gender={gender} status={status} species={species} type={type} location={location}/>
+          <Detail
+            image={image}
+            name={name}
+            gender={gender}
+            status={status}
+            species={species}
+            type={type}
+            location={location}
+          />
         )}
       </div>
       <div className="d-flex justify-content-center mt-5">

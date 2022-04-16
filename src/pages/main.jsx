@@ -4,9 +4,6 @@ import { Link } from "react-router-dom";
 import CharacterCard from "../components/character-card";
 import Header from "../components/header";
 import Pagination from "../components/pagination";
-
-
-
 import {
   fetchCharacters,
   selectCharacters,
@@ -25,15 +22,14 @@ const Main = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const prev = () => {
-    setPageNumber(pageNumber => pageNumber - 1)
-    window.scrollTo({ top: 0})
-  }   
- 
-  const next = () => {
-      setPageNumber(pageNumber => pageNumber + 1)
-      window.scrollTo({ top: 0})
-}   
+    setPageNumber((pageNumber) => pageNumber - 1);
+    window.scrollTo({ top: 0 });
+  };
 
+  const next = () => {
+    setPageNumber((pageNumber) => pageNumber + 1);
+    window.scrollTo({ top: 0 });
+  };
 
   useEffect(
     () => dispatch(fetchCharacters(pageNumber)),
@@ -42,21 +38,27 @@ const Main = () => {
 
   return (
     <>
-      <Header pageNumber={pageNumber} setPageNumber={setPageNumber} lastPage={pagination?.pages} prev={prev} next={next}/>
+      <Header
+        pageNumber={pageNumber}
+        setPageNumber={setPageNumber}
+        lastPage={pagination?.pages}
+        prev={prev}
+        next={next}
+      />
       <div className="row">
         {characters?.map(({ id, name, image }) => (
           <div key={id} className="col-lg-4 col-md-4 col-sm-6 ml-5">
-            <Link to={`character/${id}`} style={{textDecoration:'none'}}>
+            <Link to={`character/${id}`} style={{ textDecoration: "none" }}>
               <CharacterCard name={name} image={image} />
             </Link>
           </div>
         ))}
       </div>
 
-      {pending && <p className="text-xl font-bold text-center">Loading...</p>}
-      {error && <p className="text-xl font-bold text-center">{error}</p>}
+      {pending && <p>Loading...</p>}
+      {error && <p>{error}</p>}
       {!pending && !error && !characters?.length && (
-        <p className="text-xl font-bold text-center">Something happened...</p>
+        <p>Something happened...</p>
       )}
       <Pagination
         pageNumber={pageNumber}
