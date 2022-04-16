@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CharacterCard from "../components/character-card";
-import Pagination from "../components/pagination";
 import Header from "../components/header";
+import Pagination from "../components/pagination";
+
 
 
 import {
@@ -12,7 +13,7 @@ import {
   selectCharactersPending,
   selectCharactersPagination,
   selectCharactersError,
-} from "../redux/rickAndMorty/charactersSlice";
+} from "../redux/charactersSlice";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -57,16 +58,6 @@ const Main = () => {
       {!pending && !error && !characters?.length && (
         <p className="text-xl font-bold text-center">Something happened...</p>
       )}
-
-      {/* <div className="flex flex-col items-center justify-between px-20 mt-10 mb-20 gap-y-2 sm:items-center sm:flex-row">
-        <Button onClick={goToPrevPage} disabled={!hasPreviousPage}>
-          Back
-        </Button>
-
-        <Button onClick={goToNextPage} disabled={!hasNextPage}>
-          Next
-        </Button>
-      </div> */}
       <Pagination
         pageNumber={pageNumber}
         lastPage={pagination?.pages}

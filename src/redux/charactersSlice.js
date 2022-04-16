@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCharacter, getCharacters } from "../../services/rickAndMorty";
+import { getCharacter, getCharacters } from "../services/rickAndMorty";
 
 const initialState = {
   pagination: {},

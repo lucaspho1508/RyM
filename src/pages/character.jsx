@@ -8,7 +8,7 @@ import {
   selectCharactersError,
   selectCharactersPending,
   selectCurrentCharacter,
-} from "../redux/rickAndMorty/charactersSlice";
+} from "../redux/charactersSlice";
 
 const Character = () => {
   const { id } = useParams();
