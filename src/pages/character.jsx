@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import Card from "react-bootstrap/Card";
+import Detail from "../components/detail";
 
 import {
   fetchCharacter,
@@ -40,25 +40,13 @@ const Character = () => {
         )}
 
         {!pending && character?.id && (
-          <Card className="mx-auto" style={{ width: "32rem" }}>
-            <Card.Img variant="top" src={image} />
-            <Card.Body>
-              <Card.Title>{name}</Card.Title>
-              <Card.Text>Gender: {gender}</Card.Text>
-              <Card.Text>Status: {status}</Card.Text>
-              <Card.Text>Species: {species}</Card.Text>
-              <Card.Text>{type ? `Type: ${type}` : null}</Card.Text>
-              <Card.Text>
-                {location ? `Location: ${location?.name}` : null}
-              </Card.Text>
-            </Card.Body>
-          </Card>
+          <Detail image={image} name={name} gender={gender} status={status} species={species} type={type} location={location}/>
         )}
       </div>
-      <div class="d-flex justify-content-center mt-5">
+      <div className="d-flex justify-content-center mt-5">
         <button
           type="button"
-          class="btn btn-primary btn-lg btn-block"
+          className="btn btn-primary btn-lg btn-block"
           onClick={goBack}
         >
           Back to Main Menu

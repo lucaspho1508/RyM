@@ -44,8 +44,8 @@ const Main = () => {
       <Header pageNumber={pageNumber} setPageNumber={setPageNumber} lastPage={pagination?.pages} prev={prev} next={next}/>
       <div className="row">
         {characters?.map(({ id, name, image }) => (
-          <div className="col-lg-4 col-md-4 col-sm-6 ml-5">
-            <Link key={`character-${id}`} to={`character/${id}`} style={{textDecoration:'none'}}>
+          <div key={id} className="col-lg-4 col-md-4 col-sm-6 ml-5">
+            <Link to={`character/${id}`} style={{textDecoration:'none'}}>
               <CharacterCard name={name} image={image} />
             </Link>
           </div>

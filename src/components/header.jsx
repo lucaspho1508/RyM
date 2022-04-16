@@ -8,7 +8,7 @@ const Header = (setPageNumber) => {
   }
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 mb-5 ">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light py-3 mb-5 ">
       <Link to="/" className="flex-1 mx-auto" onClick={firstPage} style={{textDecoration:'none'}}>
         <h1>
           Rick and Morty Challenge
